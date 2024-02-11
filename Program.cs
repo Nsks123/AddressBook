@@ -221,57 +221,192 @@ namespace Address_Book_System
             }
         }
     }
+
+    class User
+    {
+        private Dictionary<string, AddressBook> users;
+
+        public User()
+        {
+            users = new Dictionary<string, AddressBook>();
+        }
+
+        public void addUser(string name)
+        {
+            AddressBook book = new AddressBook();
+            users.Add(name, book);
+        }
+
+        public void deleteUser(string name)
+        {
+            users.Remove(name);
+        }
+
+        public AddressBook getAddressBook(string name)
+        {
+            return users[name];
+        }
+
+        public Dictionary<string, AddressBook> GetUser()
+        {
+            return users;
+        }
+
+    }
     internal class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Program.");
-            AddressBook obj = new AddressBook();
-            int flag = 0;
-            do
+
+            User obj1 = new User();
+
+            bool flags = true;
+
+            while (flags)
             {
                 Console.WriteLine("Select an option: ");
-                Console.WriteLine("1.Add Details\n2.Display Details\n3.Edit a contact\n4.Delete\n5.Exit");
-                int option = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("1.Add User\n2.Perform Operations\n3.Display\n4.Exit");
+                int options = Convert.ToInt32(Console.ReadLine());
 
-                switch (option)
+                switch (options)
                 {
                     case 1:
                         Console.Clear();
-                        Console.WriteLine("Add details:\n");
-                        obj.add_details();
+                        Console.WriteLine("Add Name:\n");
+                        string name = Console.ReadLine();
+                        AddressBook book = new AddressBook();
+                        obj1.addUser(name);
+
+                        int flag = 0;
+                        do
+                        {
+                            Console.WriteLine("Select an option: ");
+                            Console.WriteLine("1.Add Details\n2.Display Details\n3.Edit a contact\n4.Delete\n5.Exit");
+                            int option = Convert.ToInt32(Console.ReadLine());
+
+                            switch (option)
+                            {
+                                case 1:
+                                    Console.Clear();
+                                    Console.WriteLine("Add details:\n");
+                                    book.add_details();
+                                    Console.Clear();
+                                    break;
+                                case 2:
+                                    Console.Clear();
+                                    Console.WriteLine("Displaying Contact:\n");
+                                    book.display();
+                                    Thread.Sleep(2000);
+                                    break;
+                                case 3:
+                                    Console.Clear();
+                                    Console.WriteLine("Enter name to edit the details\n");
+                                    string names = Console.ReadLine();
+                                    book.edit_contact(names);
+                                    Thread.Sleep(2000);
+                                    break;
+                                case 4:
+                                    Console.Clear();
+                                    Console.WriteLine("Enter name to delete a contact\n");
+                                    names = Console.ReadLine();
+                                    book.delete_contact(names);
+                                    Thread.Sleep(2000);
+                                    break;
+                                case 5:
+                                    flag = 1;
+                                    Console.Clear();
+                                    Console.WriteLine("Exited");
+                                    Thread.Sleep(2000);
+                                    break;
+                            }
+                            Console.Clear();
+                        } while (flag == 0);
+
+                        Console.WriteLine($"User {name} added successfully with a new Address Book with contact.");
                         Console.Clear();
+                        Thread.Sleep(2000);
+                        Console.Clear();
+
                         break;
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Displaying Contact:\n");
-                        obj.display();
-                        Thread.Sleep(2000);
+                        Console.WriteLine("Select User:\n");
+                        string choseName = Console.ReadLine();
+                        Console.Clear();
+
+                        if (obj1.GetUser().ContainsKey(choseName))
+                        {
+                            AddressBook obj3 = obj1.getAddressBook(choseName);
+                            int flagg = 0;
+                            do
+                            {
+                                Console.WriteLine("Select an option: ");
+                                Console.WriteLine("1.Add Details\n2.Display Details\n3.Edit a contact\n4.Delete\n5.Exit");
+                                int option = Convert.ToInt32(Console.ReadLine());
+
+                                switch (option)
+                                {
+                                    case 1:
+                                        Console.Clear();
+                                        Console.WriteLine("Add details:\n");
+                                        obj3.add_details();
+                                        Console.Clear();
+                                        break;
+                                    case 2:
+                                        Console.Clear();
+                                        Console.WriteLine("Displaying Contact:\n");
+                                        obj3.display();
+                                        Thread.Sleep(2000);
+                                        break;
+                                    case 3:
+                                        Console.Clear();
+                                        Console.WriteLine("Enter name to edit the details\n");
+                                        string names = Console.ReadLine();
+                                        obj3.edit_contact(names);
+                                        Thread.Sleep(2000);
+                                        break;
+                                    case 4:
+                                        Console.Clear();
+                                        Console.WriteLine("Enter name to delete a contact\n");
+                                        names = Console.ReadLine();
+                                        obj3.delete_contact(names);
+                                        Thread.Sleep(2000);
+                                        break;
+                                    case 5:
+                                        Console.Clear();
+                                        Console.WriteLine("Exited");
+                                        Thread.Sleep(2000);
+                                        flag = 1;
+                                        break;
+                                }
+                                Console.Clear();
+                            } while (flagg == 0);
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Person {choseName} not found.");
+                            Thread.Sleep(2000);
+                            Console.Clear();
+                        }
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Enter name to edit the details\n");
-                        string name = Console.ReadLine();
-                        obj.edit_contact(name);
-                        Thread.Sleep(2000);
+                        Console.WriteLine("Persons\n");
+                        foreach (var person in obj1.GetUser().Keys)
+                        {
+                            Console.WriteLine(person);
+                        }
+                        Console.ReadLine();
                         break;
+
                     case 4:
-                        Console.Clear();
-                        Console.WriteLine("Enter name to delete a contact\n");
-                        name = Console.ReadLine();
-                        obj.delete_contact(name);
-                        Thread.Sleep(2000);
+                        flags = false;
                         break;
-                    case 5:
-                        Console.Clear();
-                        Console.WriteLine("Exited");
-                        Thread.Sleep(2000);
-                        flag = 1;
-                        break;
+
                 }
-                Console.Clear();
-            } while (flag == 0);
-            Console.ReadLine();
+            }
         }
     }
 }
