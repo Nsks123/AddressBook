@@ -56,7 +56,11 @@ namespace AddressBookSystem
             }
             while (!Regex.IsMatch(zip, zippattern));
             Console.Write("email: ");
+            UC9-Ability_To_View_Persons
             string email_pattern = "^[a-zA-Z0-9]+[@][a-z]+[.][a-z]{1,3}$";
+
+            string email_pattern = "^[a-zA-z0-9]+[@]+[a-z]+[.]+[a-z]{1,3}$";
+            main
             String email;
             do
             {
@@ -188,7 +192,11 @@ namespace AddressBookSystem
                 Console.WriteLine("Contact is not there in the addressBook");
             }
         }
+        UC9-Ability_To_View_Persons
         public void searchByCity()
+
+        public void search()
+        main
         {
             Console.WriteLine("Enter the city name to get contact :");
             string city_name = Console.ReadLine();
@@ -203,6 +211,7 @@ namespace AddressBookSystem
             }
             Console.WriteLine($"count:{count}");
         }
+       UC9-Ability_To_View_Persons
         public void searchByName()
         {
             Console.WriteLine("Enter the name to get city and state :");
@@ -217,6 +226,7 @@ namespace AddressBookSystem
                 }
             }
         }
+       UC10-Ability_To_Count
         public void SortContact()
         {
             foreach (var de in dict)
@@ -228,5 +238,8 @@ namespace AddressBookSystem
         {
             return contacts;
         }
+
+        main
+
     }
 }
