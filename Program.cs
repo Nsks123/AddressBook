@@ -15,6 +15,10 @@ namespace AddressBookSystem
         static void Main(string[] args)
         {
             User user = new User();
+            UC11-SortEntriesByName
+            AddressBook obj1 = new AddressBook();
+
+     main
 
             bool flag = true;
             do
@@ -23,8 +27,17 @@ namespace AddressBookSystem
                 Console.WriteLine("1.To add User ");
                 Console.WriteLine("2.To perform operation in the AddressBook");
                 Console.WriteLine("3.To display User's of AddressBook");
+              UC11-SortEntriesByName
+                Console.WriteLine("4 To seach by name");
+                Console.WriteLine("5 To search by city");
+                Console.WriteLine("6 To search by state");
+                Console.WriteLine("7.To count by contact by city");
+                Console.WriteLine("8.To count by contact by state");
+                Console.WriteLine("8.To exit");
+
                 Console.WriteLine("4.To find the city of the contact person");
                 Console.WriteLine("4.To exit ");
+                  
                 int operation = Convert.ToInt16(Console.ReadLine());
 
                 switch (operation)
@@ -52,8 +65,12 @@ namespace AddressBookSystem
                                 Console.WriteLine("2.To Display the contact in Address Book");
                                 Console.WriteLine("3.TO Edit the contact in Address Book");
                                 Console.WriteLine("4.TO remove the contact in Address Book");
+                    UC11-SortEntriesByName
+                                Console.WriteLine("5.TO Exit from the Address Book");
+
                                 Console.WriteLine("5 To display contact by city");
                                 Console.WriteLine("6.TO Exit from the Address Book");
+
                                 op = Convert.ToInt32(Console.ReadLine());
                                 switch (op)
                                 {
@@ -81,12 +98,15 @@ namespace AddressBookSystem
                                         Thread.Sleep(2000);
                                         Console.Clear();
                                         break;
+                                    UC11-SortEntriesByName
+
                                     case 5:
                                         Console.Clear();
                                         obj.search();
                                         Thread.Sleep(2000);
                                         Console.Clear();
                                         break;
+
                                 }
                             }
                             else
@@ -100,6 +120,8 @@ namespace AddressBookSystem
                             }
 
                         } while (op != 5);
+                 UC11-SortEntriesByName
+
 
                         Console.Clear();
                         break;
@@ -110,8 +132,61 @@ namespace AddressBookSystem
                         Thread.Sleep(5000);
                         Console.Clear();
                         break;
+                  UC11-SortEntriesByName
+                    case 4:
+                        Console.Clear();
+                        List<Contact> clist = new List<Contact>();
+                        Console.WriteLine("Enter the name of the person");
+                        string searchname = Console.ReadLine();
+                        clist = user.SearchPersonsInName(searchname);
+                        obj1.displaybyname(clist);
+                        Thread.Sleep(5000);
+                        Console.Clear();
+                        break;
                     case 5:
+                        Console.Clear();
+                        List<Contact> citylist = new List<Contact>();
+                        Console.WriteLine("Enter the name of the city");
+                        string searchcity = Console.ReadLine();
+                        citylist = user.SearchPersonsInCity(searchcity);
+                        obj1.displaybycityorstate(citylist);
+                        Thread.Sleep(5000);
+                        Console.Clear();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        List<Contact> statelist = new List<Contact>();
+                        Console.WriteLine("Enter the name of the state");
+                        string searchstate = Console.ReadLine();
+                        statelist = user.SearchPersonsInState(searchstate);
+                        obj1.displaybycityorstate(statelist);
+                        Thread.Sleep(5000);
+                        Console.Clear();
+                        break;
+                    case 7:
+                        Console.Clear();
+                        List<Contact> cityCountlist = new List<Contact>();
+                        Console.WriteLine("Enter the name of the city");
+                        string searchcitytocount = Console.ReadLine();
+                        citylist = user.SearchPersonsInState(searchcitytocount);
+                        Console.WriteLine($"The number of contact in the city {searchcitytocount} is {citylist.Count}");
+                        Thread.Sleep(5000);
+                        Console.Clear();
+                        break;
+                    case 8:
+                        Console.Clear();
+                        List<Contact> stateCountlist = new List<Contact>();
+                        Console.WriteLine("Enter the name of the state");
+                        string searchstatetocount = Console.ReadLine();
+                        statelist = user.SearchPersonsInState(searchstatetocount);
+                        Console.WriteLine($"The number of contact in the state {searchstatetocount} is {statelist.Count}");
+                        Thread.Sleep(5000);
+                        Console.Clear();
+                        break;
+                    case 9:
 
+                    case 5:
+                    
                         flag = false;
                         break;
                 }

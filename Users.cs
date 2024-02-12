@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace AddressBookSystem
     internal class User
     {
         Dictionary<string, AddressBook> dict = new Dictionary<string, AddressBook>();
-
+        List<Contact> co = new List<Contact>();
         public User()
         {
             dict = new Dictionary<string, AddressBook>();
@@ -46,10 +47,51 @@ namespace AddressBookSystem
                 Console.WriteLine(book.Key);
             }
         }
+        public void displayoneContact(Contact con)
+        {
+            Console.WriteLine($"FirstName: {con.Fname}");
+            Console.WriteLine($"lastname: {con.lastname}");
+            Console.WriteLine($"address: {con.Addres}");
+            Console.WriteLine($"city: {con.City}");
+            Console.WriteLine($"state: {con.State}");
+            Console.WriteLine($"zip: {con.ZipCode}");
+            Console.WriteLine($"email: {con.Email}");
+            Console.WriteLine($"Phone number: {con.PhoneNumber}");
+            Console.WriteLine("----------------------------------------");
+        }
         public AddressBook GetAddressBook(string name)
         {
             return dict[name];
         }
 
+        public List<Contact> SearchPersonsInCity(string city)
+        {
+            List<Contact> results = new List<Contact>();
+            foreach (var addressBook in dict.Values)
+            {
+                results.AddRange(addressBook.SearchByCity(city));
+            }
+            return results;
+        }
+        public List<Contact> SearchPersonsInState(string state)
+        {
+            List<Contact> results = new List<Contact>();
+            foreach (var addressBook in dict.Values)
+            {
+                results.AddRange(addressBook.SearchByState(state));
+            }
+            return results;
+        }
+        public List<Contact> SearchPersonsInName(string name)
+        {
+            List<Contact> results = new List<Contact>();
+            foreach (var addressBook in dict.Values)
+            {
+                results.AddRange(addressBook.SearchByName(name));
+            }
+            return results;
+        }
+
     }
+
 }
