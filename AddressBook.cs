@@ -228,5 +228,30 @@ namespace AddressBookSystem
         {
             return contacts;
         }
+
+        internal void displaybyname(List<Contact> clist)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void displaybycityorstate(List<Contact> citylist)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<Contact> SearchByCity(string city)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<Contact> SearchByState(string state)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<Contact> SearchByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
